@@ -32,28 +32,12 @@ currentPage = 1;
     const response = await searchImages(searchQuery);
     displayImages(response.data.hits);
     displayTotalHits(response.data.totalHits);
-    // hideEndOfResultsMessage(); // Hide the end of results message when a new search is performed
     refreshLightbox();
   } catch (error) {
     showError();
   }
 });
 
-
-// function showEndOfResultsMessage() {
-//   loadMoreButton.style.display = "none";
-//   const endMessage = document.createElement("p");
-//   endMessage.classList.add("end-message");
-//   endMessage.textContent = "We're sorry, but you've reached the end of search results.";
-//   gallery.appendChild(endMessage);
-// }
-
-// function hideEndOfResultsMessage() {
-//   const endMessage = document.querySelector(".end-message");
-//   if (endMessage) {
-//     gallery.removeChild(endMessage);
-//   }
-// }
 
 loadMoreButton.addEventListener("click", async () => {
   try {
@@ -77,10 +61,8 @@ loadMoreButton.addEventListener("click", async () => {
 
 
 function displayImages(images) {
-    
-        gallery.innerHTML = "";
-        loadMoreButton.style.display = "block";
-
+    loadMoreButton.style.display = "block";
+gallery.innerHTML = "";
         images.forEach(image => {
             gallery.appendChild(createImageCard(image));
         })
