@@ -32,7 +32,7 @@ currentPage = 1;
     const response = await searchImages(searchQuery);
     displayImages(response.data.hits);
     displayTotalHits(response.data.totalHits);
-    hideEndOfResultsMessage(); // Hide the end of results message when a new search is performed
+    // hideEndOfResultsMessage(); // Hide the end of results message when a new search is performed
     refreshLightbox();
   } catch (error) {
     showError();
@@ -40,20 +40,20 @@ currentPage = 1;
 });
 
 
-function showEndOfResultsMessage() {
-  loadMoreButton.style.display = "none";
-  const endMessage = document.createElement("p");
-  endMessage.classList.add("end-message");
-  endMessage.textContent = "We're sorry, but you've reached the end of search results.";
-  gallery.appendChild(endMessage);
-}
+// function showEndOfResultsMessage() {
+//   loadMoreButton.style.display = "none";
+//   const endMessage = document.createElement("p");
+//   endMessage.classList.add("end-message");
+//   endMessage.textContent = "We're sorry, but you've reached the end of search results.";
+//   gallery.appendChild(endMessage);
+// }
 
-function hideEndOfResultsMessage() {
-  const endMessage = document.querySelector(".end-message");
-  if (endMessage) {
-    gallery.removeChild(endMessage);
-  }
-}
+// function hideEndOfResultsMessage() {
+//   const endMessage = document.querySelector(".end-message");
+//   if (endMessage) {
+//     gallery.removeChild(endMessage);
+//   }
+// }
 
 loadMoreButton.addEventListener("click", async () => {
   try {
@@ -66,7 +66,9 @@ loadMoreButton.addEventListener("click", async () => {
       appendImages(response.data.hits);
       refreshLightbox();
       } else {
-      showEndOfResultsMessage();
+          Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+          loadMoreButton.style.display = "none";
+
     }
   } catch (error) {
     showError();
